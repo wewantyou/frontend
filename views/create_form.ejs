@@ -169,19 +169,17 @@
         });
 
         $(document).on('click', '.submitButton', function() {
+            console.log("==========================================")
             console.log(arrayOfBlocks)
 
             $.ajax({
                 type: 'POST',
-                url: "https://wilkmaia.xyz/forms",
-                crossDomain: true,
-                data: arrayOfBlocks,
-                headers: {
-                    "Access-Control-Allow-Origin" : "*",
-                    "Access-Control-Allow-Credentials": "true",
-                    "Access-Control-Allow-Methods": "GET,HEAD,OPTIONS,POST,PUT",
-                },
-            }).done(function(response) { 
+                url: "/send_form",
+                dataType: "json",
+                contentType: "application/json ; charset=utf-8",
+                data: JSON.stringify(arrayOfBlocks),
+            }).done(function(response) {
+                console.log("==========================================")
                 console.log(response)
             });
         });
