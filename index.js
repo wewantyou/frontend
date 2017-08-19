@@ -1,6 +1,6 @@
 var express = require('express');
 var app = express();
-var util = require('util')
+var util = require('util');
 
 var bodyParser = require('body-parser');
 var db = require('./db.js');
@@ -8,12 +8,17 @@ var db = require('./db.js');
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({ extended: false }));
 
-app.get('/', function(req, res) {
-    res.render('login', {error: ''});
+app.get('/create_form', function(req, res) {
+    res.render('create_form');
 });
 
-app.get('/sign_up', function(req, res) {
-    res.render('sign_up');
+
+
+
+
+
+app.get('/', function(req, res) {
+    res.render('login', {error: ''});
 });
 
 app.post('/create_customer_account_links', function(req, res) {

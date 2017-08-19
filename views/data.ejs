@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+    <div>
+        <div>
+            <div>
+                <img src="" alt="Smiley face" height="42" width="42">
+            </div>
+            <div>
+                <div>Candidato:</div>
+                <div class="addSpace"></div>
+                <div><%= name %></div> 
+            </div>
+        </div>
+
+        <body>
+            <span>User ID: <%= uid %></span><br>
+            <span>Account ID: <%= aid %></span><br>
+            <span>Agency: <%= agency %></span><br>
+            <span>Amount: <%= amount %></span><br><br>
+        </body>
+        <div>
+            <button type="button" onclick="deposit(<%= aid %>)" id="deposit">Deposit</button>
+            <button type="button" onclick="withdraw(<%= aid %>)" id="withdraw">Withdraw</button>
+            <button type="button" onclick="transfer(<%= aid %>)" id="transfer">Transfer</button>
+            <form action="/" method="GET" style="display: inline;">
+                <button>Cancel</button>
+            </form>
+            <br>
+
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+            <script>
+                function deposit(aid){    
+                    if(aid){
+                        console.log('success');
+
+                        var form_deposit = document.createElement("form");
+                        form_deposit.method = "post";
+                        form_deposit.action = "/show_deposit_page";
+
+                        var aid_input = document.createElement("input");
+                        aid_input.type = "hidden";
+                        aid_input.name = "aid";
+                        aid_input.value = aid;
+                        form_deposit.appendChild(aid_input);
+
+                        document.body.appendChild(form_deposit);
+                        form_deposit.submit();
+                    }else{
+                        console.log('Nao!');
+                    }
+                }
+
+                function withdraw(aid){    
+                    if(aid){
+                        console.log('success');
+
+                        var form_withdraw = document.createElement("form");
+                        form_withdraw.method = "post";
+                        form_withdraw.action = "/show_withdraw_page";
+
+                        var aid_input = document.createElement("input");
+                        aid_input.type = "hidden";
+                        aid_input.name = "aid";
+                        aid_input.value = aid;
+                        form_withdraw.appendChild(aid_input);
+
+                        document.body.appendChild(form_withdraw);
+                        form_withdraw.submit();
+                    }else{
+                        console.log('Nao!');
+                    }
+                }
+
+                function transfer(aid){    
+                    if(aid){
+                        console.log('success');
+
+                        var form_transfer = document.createElement("form");
+                        form_transfer.method = "post";
+                        form_transfer.action = "/show_transfer_page";
+
+                        var aid_input = document.createElement("input");
+                        aid_input.type = "hidden";
+                        aid_input.name = "aid";
+                        aid_input.value = aid;
+                        form_transfer.appendChild(aid_input);
+
+                        document.body.appendChild(form_transfer);
+                        form_transfer.submit();
+                    }else{
+                        console.log('Nao!');
+                    }
+                }
+            </script>
+        </div>
+    </div>
+</html>
