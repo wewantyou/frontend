@@ -17,6 +17,7 @@ app.get('/create_form', function(req, res) {
 
 
 
+
 app.get('/', function(req, res) {
     res.render('login', {error: ''});
 });
@@ -201,48 +202,6 @@ app.post('/withdraw', function(req, res) {
 		}
 	})
 });
-
-// app.post('/go_back_dashboard', function(req, res) {
-// 	var aid = req.body.aid;
-
-// 	var query1;
-// 	query1 = "SELECT customer_uid FROM Links WHERE account_id='",
-// 	query1 += aid;
-// 	query1 += "'";
-
-// 	db.query(query1, function (error, result) {
-//   		if (error) throw error;
-//   		var uid = result[0].customer_uid;
-//   		console.log('uid: ' + uid);
-
-//   		var query2;
-// 		query2 = "SELECT customer_name FROM Customer WHERE customer_uid='",
-// 		query2 += uid;
-// 		query2 += "'";
-
-//   		db.query(query2, function (error, result) {
-// 	  		if (error) throw error;
-//   			var name = result[0].customer_name;
-//   			console.log('name: ' + name);
-
-//   			var query3;
-// 			query3 = "SELECT account_amount, account_agency FROM Account WHERE account_id='",
-// 			query3 += aid;
-// 			query3 += "'";
-
-// 			db.query(query3, function (error, result) {
-// 		  		if (error) throw error;
-// 		  		var amount = result[0].account_amount;
-// 		  		var agency = result[0].account_agency;
-
-// 		  		console.log('amount: ' + amount);
-// 		  		console.log('agency: ' + agency);
-
-// 	    		res.render('dashboard', {name: name, uid: uid, aid: aid, agency: agency, amount: amount});
-// 			});
-// 		});
-// 	});
-// });
 
 app.post('/show_transfer_page', function(req, res) {
 	var aid = req.body.aid;

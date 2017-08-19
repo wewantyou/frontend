@@ -31,53 +31,55 @@
         {'option': 'Text', 'question': '', 'answer': ''}
       ]
 
-    $(document).ready(function() {
+    $(document).ready(function(){
         var arrayLength = arrayOfBlocks.length
 
-        for(var i = 0; i < arrayLength; i++) {
-            // console.log("ready: " + i + " " + arrayOfBlocks[i].option);
-
+        for(var i = 0; i < arrayLength; i++){
             if(arrayOfBlocks[i].option == 'Text'){
-                document.getElementById('blocks').innerHTML += "<div id='block" + i + "' class='block'><select class='blockSelector' id='options'><option value='Text' select>Resposta de texto</option><option value='Múltiple'>Múltipla escolha</option><option value='Boxes'>Caixas de seleção</option><option value='Toggle'>Duas opções</option></select><div class='blockContent' id='content'></div><button class='deleteBlock'><div class='deleteButton'><div class='deleteButtonText'>+</div></div><div class='deleteSpace'></div><div class='deleteText'>Deletar bloco</div></button></div>"
+                document.getElementById('blocks').innerHTML += "<div id='block" + i + "' class='block'><select class='blockSelector' id='options'><option value='Text' select>Resposta de texto</option><option value='Múltiple'>Múltipla escolha</option><option value='Boxes'>Caixas de seleção</option><option value='Toggle'>Duas opções</option></select><div class='blockContent' id='content'>Bob1</div><button class='deleteBlock'><div class='deleteButton'><div class='deleteButtonText'>-</div></div><div class='deleteSpace'></div><div class='deleteText'>Deletar bloco</div></button></div>"
             } else if (arrayOfBlocks[i].option == 'Multiple'){
-                document.getElementById('blocks').innerHTML += '<div id="block' + i + '" class="block"><select class="blockSelector" id="options"><option value="Text">Resposta de texto</option><option value="Múltiple" selected>Múltipla escolha</option><option value="Boxes">Caixas de seleção</option><option value="Toggle">Duas opções</option></select><div class="blockContent" id="content"></div><button class="deleteBlock"><div class="deleteButton"><div class="deleteButtonText">+</div></div><div class="deleteSpace"></div><div class="deleteText">Deletar bloco</div></button></div>'
+                document.getElementById('blocks').innerHTML += "<div id='block" + i + "' class='block'><select class='blockSelector' id='options'><option value='Text'>Resposta de texto</option><option value='Múltiple' select>Múltipla escolha</option><option value='Boxes'>Caixas de seleção</option><option value='Toggle'>Duas opções</option></select><div class='blockContent' id='content'>Bob2</div><button class='deleteBlock'><div class='deleteButton'><div class='deleteButtonText'>-</div></div><div class='deleteSpace'></div><div class='deleteText'>Deletar bloco</div></button></div>"
             } else if (arrayOfBlocks[i].option == 'Boxes'){
-                document.getElementById('blocks').innerHTML += '<div id="block' + i + '" class="block"><select class="blockSelector" id="options"><option value="Text">Resposta de texto</option><option value="Múltiple">Múltipla escolha</option><option value="Boxes" selected>Caixas de seleção</option><option value="Toggle">Duas opções</option></select><div class="blockContent" id="content"></div><button class="deleteBlock"><div class="deleteButton"><div class="deleteButtonText">+</div></div><div class="deleteSpace"></div><div class="deleteText">Deletar bloco</div></button></div>'
+                document.getElementById('blocks').innerHTML += "<div id='block" + i + "' class='block'><select class='blockSelector' id='options'><option value='Text'>Resposta de texto</option><option value='Múltiple'>Múltipla escolha</option><option value='Boxes' select>Caixas de seleção</option><option value='Toggle'>Duas opções</option></select><div class='blockContent' id='content'>Bob3</div><button class='deleteBlock'><div class='deleteButton'><div class='deleteButtonText'>-</div></div><div class='deleteSpace'></div><div class='deleteText'>Deletar bloco</div></button></div>"
             } else if (arrayOfBlocks[i].option == 'Toggle'){
-                document.getElementById('blocks').innerHTML += '<div id="block' + i + '" class="block"><select class="blockSelector" id="options"><option value="Text">Resposta de texto</option><option value="Múltiple">Múltipla escolha</option><option value="Boxes">Caixas de seleção</option><option value="Toggle" selected>Duas opções</option></select><div class="blockContent" id="content"></div><button class="deleteBlock"><div class="deleteButton"><div class="deleteButtonText">+</div></div><div class="deleteSpace"></div><div class="deleteText">Deletar bloco</div></button></div>'
+                document.getElementById('blocks').innerHTML += "<div id='block" + i + "' class='block'><select class='blockSelector' id='options'><option value='Text'>Resposta de texto</option><option value='Múltiple'>Múltipla escolha</option><option value='Boxes'>Caixas de seleção</option><option value='Toggle' select>Duas opções</option></select><div class='blockContent' id='content'>Bob4</div><button class='deleteBlock'><div class='deleteButton'><div class='deleteButtonText'>-</div></div><div class='deleteSpace'></div><div class='deleteText'>Deletar bloco</div></button></div>"
             }
         }
 
-        $('.blockSelector').change(function(){
+        $(document).on('change', '.blockSelector', function() {
             var option = $(this).val();
             var parent = $(this).parent();
 
             console.log('option: ' + option)
             console.log(parent)
 
-            if(option == Text) {
-
-            } else if (option == Multiple) {
-
-            } else if (option == Boxes) {
-
-            } else if (option == Toggle){
-
+            if(option == 'Text') {
+                parent.find('#content').html('<div>Bob Lesnar<div>');
+                console.log('I came here1')
+            } else if (option == 'Multiple') {
+                parent.find('#content').html('<div>Bob Dick<div>');
+                console.log('I came here2')
+            } else if (option == 'Boxes') {
+                parent.find('#content').html('<div>Bob Brookes<div>');
+                console.log('I came here3')
+            } else if (option == 'Toggle'){
+                parent.find('#content').html('<div>Bob Focus<div>');
+                console.log('I came here4')
             }
-        })
-
-        $('.deleteBlock').click(function(){
-            console.log($(this).parent())
-            $(this).parent().hide();
         });
 
-        $('.addBlock').click(function(){
+        $(document).on('click', '.deleteBlock', function() {
+            console.log($(this).parent())
+            $(this).parent().remove();
+        });
+
+        $(document).on('click', '.addBlock', function() {
             arrayOfBlocks.push({'option': 'Text', 'question': '', 'answer': ''})
 
             var i = arrayOfBlocks.length - 1
 
-            document.getElementById('blocks').innerHTML += "<div id='block" + i + "' class='block'><select class='blockSelector' id='options'><option value='Text' select>Resposta de texto</option><option value='Múltiple'>Múltipla escolha</option><option value='Boxes'>Caixas de seleção</option><option value='Toggle'>Duas opções</option></select><div class='blockContent' id='content'></div><button class='deleteBlock'><div class='deleteButton'><div class='deleteButtonText'>+</div></div><div class='deleteSpace'></div><div class='deleteText'>Deletar bloco</div></button></div>"
-        })
+            document.getElementById('blocks').innerHTML += "<div id='block" + i + "' class='block'><select class='blockSelector' id='options'><option value='Text' select>Resposta de texto</option><option value='Múltiple'>Múltipla escolha</option><option value='Boxes'>Caixas de seleção</option><option value='Toggle'>Duas opções</option></select><div class='blockContent' id='content'></div><button class='deleteBlock'><div class='deleteButton'><div class='deleteButtonText'>-</div></div><div class='deleteSpace'></div><div class='deleteText'>Deletar bloco</div></button></div>"
+        });
     });
 
     </script>
