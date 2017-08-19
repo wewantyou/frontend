@@ -23,7 +23,7 @@
     <button class="submitButton" id>Submeter</button>
 </html>
 
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 
     <script>
     var arrayOfBlocks = [
@@ -171,13 +171,19 @@
         $(document).on('click', '.submitButton', function() {
             console.log(arrayOfBlocks)
 
-            var form = document.createElement("form");
-
-            form.setAttribute("method", 'post');
-            form.setAttribute("action", '/forms');
-            form.setAttribute("data", arrayOfBlocks);
-
-            form.submit();
+            $.ajax({
+                type: 'POST',
+                url: "https://wilkmaia.xyz/forms",
+                crossDomain: true,
+                data: arrayOfBlocks,
+                headers: {
+                    "Access-Control-Allow-Origin" : "*",
+                    "Access-Control-Allow-Credentials": "true",
+                    "Access-Control-Allow-Methods": "GET,HEAD,OPTIONS,POST,PUT",
+                },
+            }).done(function(response) { 
+                console.log(response)
+            });
         });
     });
 
