@@ -20,7 +20,7 @@
         </button>
     </body>
 
-    <button type="submit">Submeter</button><br>
+    <button class="submitButton" id>Submeter</button>
 </html>
 
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
@@ -36,41 +36,117 @@
 
         for(var i = 0; i < arrayLength; i++){
             if(arrayOfBlocks[i].option == 'Text'){
-                document.getElementById('blocks').innerHTML += "<div id='block" + i + "' class='block'><select class='blockSelector' id='options'><option value='Text' select>Resposta de texto</option><option value='Múltiple'>Múltipla escolha</option><option value='Boxes'>Caixas de seleção</option><option value='Toggle'>Duas opções</option></select><div class='blockContent' id='content'>Bob1</div><button class='deleteBlock'><div class='deleteButton'><div class='deleteButtonText'>-</div></div><div class='deleteSpace'></div><div class='deleteText'>Deletar bloco</div></button></div>"
+                document.getElementById('blocks').innerHTML += "<div id='block" + i + "' class='block'><select class='blockSelector' id='options'><option value='Text' select>Resposta de texto</option><option value='Multiple'>Múltipla escolha</option><option value='Boxes'>Caixas de seleção</option><option value='Toggle'>Duas opções</option></select><div class='blockContent' id='" + i + "'><input class='question' type='text' name='question' placeholder='Pergunta'></input></div><button class='deleteBlock'><div class='deleteButton'><div class='deleteButtonText'>-</div></div><div class='deleteSpace'></div><div class='deleteText'>Deletar bloco</div></button></div>"
             } else if (arrayOfBlocks[i].option == 'Multiple'){
-                document.getElementById('blocks').innerHTML += "<div id='block" + i + "' class='block'><select class='blockSelector' id='options'><option value='Text'>Resposta de texto</option><option value='Múltiple' select>Múltipla escolha</option><option value='Boxes'>Caixas de seleção</option><option value='Toggle'>Duas opções</option></select><div class='blockContent' id='content'>Bob2</div><button class='deleteBlock'><div class='deleteButton'><div class='deleteButtonText'>-</div></div><div class='deleteSpace'></div><div class='deleteText'>Deletar bloco</div></button></div>"
+                document.getElementById('blocks').innerHTML += "<div id='block" + i + "' class='block'><select class='blockSelector' id='options'><option value='Text'>Resposta de texto</option><option value='Multiple' select>Múltipla escolha</option><option value='Boxes'>Caixas de seleção</option><option value='Toggle'>Duas opções</option></select><div class='blockContent' id='" + i + "'><input class='question' type='text' name='question' placeholder='Pergunta'></input><div class='choices' id='choices" + i + "'><input class='choice' type='text' name='choice' placeholder='Escolha'></input><input class='choice' type='text' name='choice' placeholder='Escolha'></input></div><button class='addChoice'>Adicionar escolha</button></div><button class='deleteBlock'><div class='deleteButton'><div class='deleteButtonText'>-</div></div><div class='deleteSpace'></div><div class='deleteText'>Deletar bloco</div></button></div>"
             } else if (arrayOfBlocks[i].option == 'Boxes'){
-                document.getElementById('blocks').innerHTML += "<div id='block" + i + "' class='block'><select class='blockSelector' id='options'><option value='Text'>Resposta de texto</option><option value='Múltiple'>Múltipla escolha</option><option value='Boxes' select>Caixas de seleção</option><option value='Toggle'>Duas opções</option></select><div class='blockContent' id='content'>Bob3</div><button class='deleteBlock'><div class='deleteButton'><div class='deleteButtonText'>-</div></div><div class='deleteSpace'></div><div class='deleteText'>Deletar bloco</div></button></div>"
+                document.getElementById('blocks').innerHTML += "<div id='block" + i + "' class='block'><select class='blockSelector' id='options'><option value='Text'>Resposta de texto</option><option value='Multiple'>Múltipla escolha</option><option value='Boxes' select>Caixas de seleção</option><option value='Toggle'>Duas opções</option></select><div class='blockContent' id='" + i + "'><input class='question' type='text' name='question' placeholder='Pergunta'></input><div class='boxes' id='boxes" + i + "'><input class='box' type='text' name='box' placeholder='Caixa'></input><input class='box' type='text' name='box' placeholder='Caixa'></input></div><button class='addBox'>Adicionar caixa</button></div></div><button class='deleteBlock'><div class='deleteButton'><div class='deleteButtonText'>-</div></div><div class='deleteSpace'></div><div class='deleteText'>Deletar bloco</div></button></div>"
             } else if (arrayOfBlocks[i].option == 'Toggle'){
-                document.getElementById('blocks').innerHTML += "<div id='block" + i + "' class='block'><select class='blockSelector' id='options'><option value='Text'>Resposta de texto</option><option value='Múltiple'>Múltipla escolha</option><option value='Boxes'>Caixas de seleção</option><option value='Toggle' select>Duas opções</option></select><div class='blockContent' id='content'>Bob4</div><button class='deleteBlock'><div class='deleteButton'><div class='deleteButtonText'>-</div></div><div class='deleteSpace'></div><div class='deleteText'>Deletar bloco</div></button></div>"
+                document.getElementById('blocks').innerHTML += "<div id='block" + i + "' class='block'><select class='blockSelector' id='options'><option value='Text'>Resposta de texto</option><option value='Multiple'>Múltipla escolha</option><option value='Boxes'>Caixas de seleção</option><option value='Toggle' select>Duas opções</option></select><div class='blockContent' id='" + i + "'><input class='question' type='text' name='question' placeholder='Pergunta'></input><div id='toggles" + i + "'><input class='choice' type='text' name='toggle' placeholder='Primeira escolha'></input><input class='choice' type='text' name='toggle' placeholder='Segunda escolha'></input></div></div><button class='deleteBlock'><div class='deleteButton'><div class='deleteButtonText'>-</div></div><div class='deleteSpace'></div><div class='deleteText'>Deletar bloco</div></button></div>"
             }
         }
 
-        $(document).on('change', '.blockSelector', function() {
-            var option = $(this).val();
-            var parent = $(this).parent();
+        $(document).on('input', '.question', function() {
+            let value = $(this).val()
+            let id = $(this).parent().attr('id')
 
-            console.log('option: ' + option)
-            console.log(parent)
+            arrayOfBlocks[id].question = value
 
-            if(option == 'Text') {
-                parent.find('#content').html('<div>Bob Lesnar<div>');
-                console.log('I came here1')
-            } else if (option == 'Multiple') {
-                parent.find('#content').html('<div>Bob Dick<div>');
-                console.log('I came here2')
-            } else if (option == 'Boxes') {
-                parent.find('#content').html('<div>Bob Brookes<div>');
-                console.log('I came here3')
-            } else if (option == 'Toggle'){
-                parent.find('#content').html('<div>Bob Focus<div>');
-                console.log('I came here4')
-            }
+            console.log(arrayOfBlocks[id])
         });
 
-        $(document).on('click', '.deleteBlock', function() {
-            console.log($(this).parent())
-            $(this).parent().remove();
+        $(document).on('input', '.choice', function() {
+            let id = $(this).parent().parent().attr('id')
+            let choiceId = $(this).parent().attr('id')
+              
+            var allValues = [];
+
+            var specificationInputs = "#" + choiceId + " :input"
+            console.log(specificationInputs)
+
+            $(specificationInputs).each(function() {
+                console.log($(this).val())
+                allValues.push($(this).val());
+            });
+
+            arrayOfBlocks[id].answer = allValues
+            console.log(arrayOfBlocks[id])
+        });
+
+        $(document).on('click', '.addChoice', function() {
+            let id = $(this).parent().attr('id')
+            let block = $(this).parent().find('.choices')
+
+            block.append("<input class='choice' type='text' name='choice' placeholder='Escolha'></input>")           
+        });
+
+        $(document).on('input', '.box', function() {
+            let id = $(this).parent().parent().attr('id')
+            let boxId = $(this).parent().attr('id')
+              
+            var allValues = [];
+
+            var specificationInputs = "#" + boxId + " :input"
+            console.log(specificationInputs)
+
+            $(specificationInputs).each(function() {
+                console.log($(this).val())
+                allValues.push($(this).val());
+            });
+
+            arrayOfBlocks[id].answer = allValues
+            console.log(arrayOfBlocks[id])
+        });
+
+        $(document).on('click', '.addBox', function() {
+            let id = $(this).parent().attr('id')
+            let block = $(this).parent().find('.boxes')
+
+            block.append("<input class='box' type='text' name='box' placeholder='Caixa'></input>")   
+        });
+
+        $(document).on('input', '.toggle', function() {
+            let id = $(this).parent().parent().attr('id')
+            let toggleId = $(this).parent().attr('id')
+              
+            var allValues = [];
+
+            var specificationInputs = "#" + toggleId + " :input"
+            console.log(specificationInputs)
+
+            $(specificationInputs).each(function() {
+                console.log($(this).val())
+                allValues.push($(this).val());
+            });
+
+            arrayOfBlocks[id].answer = allValues
+            console.log(arrayOfBlocks[id])
+        });
+
+        $(document).on('change', '.blockSelector', function() {
+            var option = $(this).val();
+            var block = $(this).parent().find('.blockContent')
+            var id = block.attr('id')
+
+            console.log(block)
+            console.log('option: ' + option)
+            console.log('real id: ' + id)
+
+            arrayOfBlocks[id].option = option
+
+            if(option == 'Text') {
+                block.html("<input class='question' type='text' name='question' placeholder='Pergunta'></input>");
+                console.log('I came here1')
+            } else if (option == 'Multiple') {
+                block.html("<input class='question' type='text' name='question' placeholder='Pergunta'></input><div class='choices' id='choices" + id + "'><input class='choice' type='text' name='choice' placeholder='Escolha'></input><input class='choice' type='text' name='choice' placeholder='Escolha'></input></div><button class='addChoice'>Adicionar escolha</button></div>");
+                console.log('I came here2')
+            } else if (option == 'Boxes') {
+                block.html("<input class='question' type='text' name='question' placeholder='Pergunta'></input><div class='boxes' id='boxes" + id + "'><input class='box' type='text' name='box' placeholder='Caixa'></input><input class='box' type='text' name='box' placeholder='Caixa'></input></div><button class='addBox'>Adicionar caixa</button></div></div>");
+                console.log('I came here3')
+            } else if (option == 'Toggle'){
+                block.html("<input class='question' type='text' name='question' placeholder='Pergunta'></input><div id='toggles" + id + "'><input class='choice' type='text' name='toggle' placeholder='Primeira escolha'></input><input class='choice' type='text' name='toggle' placeholder='Segunda escolha'></input></div></div>");
+                console.log('I came here4')
+            }
         });
 
         $(document).on('click', '.addBlock', function() {
@@ -78,7 +154,30 @@
 
             var i = arrayOfBlocks.length - 1
 
-            document.getElementById('blocks').innerHTML += "<div id='block" + i + "' class='block'><select class='blockSelector' id='options'><option value='Text' select>Resposta de texto</option><option value='Múltiple'>Múltipla escolha</option><option value='Boxes'>Caixas de seleção</option><option value='Toggle'>Duas opções</option></select><div class='blockContent' id='content'></div><button class='deleteBlock'><div class='deleteButton'><div class='deleteButtonText'>-</div></div><div class='deleteSpace'></div><div class='deleteText'>Deletar bloco</div></button></div>"
+            document.getElementById('blocks').innerHTML += "<div id='block" + i + "' class='block'><select class='blockSelector' id='options'><option value='Text' select>Resposta de texto</option><option value='Multiple'>Múltipla escolha</option><option value='Boxes'>Caixas de seleção</option><option value='Toggle'>Duas opções</option></select><div class='blockContent' id='" + i + "'><input class='question' type='text' name='question' placeholder='Pergunta'></input></div><button class='deleteBlock'><div class='deleteButton'><div class='deleteButtonText'>-</div></div><div class='deleteSpace'></div><div class='deleteText'>Deletar bloco</div></button></div>"
+        });
+
+        $(document).on('click', '.deleteBlock', function() {
+            let id = $(this).parent().find('.blockContent').attr('id')
+
+            console.log('Here: ')
+            console.log(id)
+            console.log($(this).parent())
+
+            arrayOfBlocks.splice(id, 1)
+            $(this).parent().remove();
+        });
+
+        $(document).on('click', '.submitButton', function() {
+            console.log(arrayOfBlocks)
+
+            var form = document.createElement("form");
+
+            form.setAttribute("method", 'post');
+            form.setAttribute("action", '/forms');
+            form.setAttribute("data", arrayOfBlocks);
+
+            form.submit();
         });
     });
 
