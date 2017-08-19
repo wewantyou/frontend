@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+    <div class="container">
+        <main>
+            <h1>The operation was a success!</h1> 
+            <br>
+        </main>
+    </div>
+
+    <form action="/go_back_dashboard" method="post" style="display: inline;">
+        <input type="hidden" name="aid" value="<%= aid %>"></input>
+        <button type="submit">Return to dashboard</button>
+    </form>
+
+    <span>  </span>
+
+    <form action="/" method="GET" style="display: inline;">
+        <button>Exit</button>
+    </form>
+
+</html>
