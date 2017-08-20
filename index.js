@@ -7,7 +7,8 @@ var bodyParser = require('body-parser');
 
 app.set('view engine', 'ejs');
 app.use(bodyParser.json());
-//app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.static('portraiture'))
 
 app.get('/create_form', function(req, res) {
     res.render('create_form');
@@ -18,10 +19,10 @@ app.get('/show_profile', function(req, res) {
 });
 
 app.post('/send_form', function(req, res){
-	axios.post('https://wilkmaia.xyz/forms', {block: req.body})
-	.then((err) => {
-		console.log("Wooo")
-	})
+    axios.post('https://wilkmaia.xyz/forms', {block: req.body})
+    .then((err) => {
+	    console.log("Wooo")
+    })
 })
 
 app.listen(3000);
