@@ -48,7 +48,7 @@
   padding-right: 10px;
   margin-top: 20px;
   color: #6CB94A;
-  font-size: 25px;
+  font-size: 12px;
 }
 .deleteBlock {
 	margin-left: 15px;
@@ -161,7 +161,14 @@
 .mdl-button {
 	margin-left: 600px;
 	margin-top: 20px;
+	margin-bottom: 40px;
   	color: #6CB94A;
+}
+.myComments {
+	margin-top: 10px;
+}
+.myEmail {
+	margin-bottom: 10px;
 }
 
 html, body {
@@ -339,6 +346,8 @@ ul.style1 .first {
 #buttonsBar {
 	overflow: hidden;
 	text-align: center;
+	margin-top: -20px;
+	margin-bottom: 30px;
 }
 
 #footer {

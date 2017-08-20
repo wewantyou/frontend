@@ -15,7 +15,7 @@
 		<div id="wrapper" class="container">
 			<div id="header">
 				<div id="logo">
-					<h1><a href="#">We want you</a></h1>
+					<h1><a>We want you</a></h1>
 				</div>
 			</div>
 
@@ -102,8 +102,8 @@ $(document).ready(function(){
 		var referral_level = candidate.referral_level
 		var comments = candidate.comments
 
-		card.innerHTML += `<h1 id="name-${id}">${name}</h1>`
-		card.innerHTML += `<div id="email-${id}">${email}</div>`
+		card.innerHTML += `<h1 class="myName" id="name-${id}">${name}</h1>`
+		card.innerHTML += `<div class="myEmail" id="email-${id}">${email}</div>`
 
 		if (referral) {
 			card.innerHTML += `<div id="referral-${id}"><b>Referrer</b>: ${referral}</div>`
@@ -123,7 +123,7 @@ $(document).ready(function(){
 		card.innerHTML += `</div>`
 
 		if (comments) {
-			card.innerHTML += `<div id="comments-${id}">`
+			card.innerHTML += `<div class="myComments" id="comments-${id}">`
 			for (let i = 0; i < comments.length; ++i) {
 				var comment = comments[i]
 				card.innerHTML += `<span>${comment.author}: ${comment.comment}</span><br>`
@@ -137,11 +137,8 @@ $(document).ready(function(){
 		content.innerHTML = ''
 
 		content.innerHTML += `<ul>`
-
-		if (typeof form === 'string') {
-			form = JSON.parse(form)
-		}
-
+		console.log(form)
+		if(typeof form == 'string') form = JSON.parse(form)
 		for (var question in form) {
 			var answer = form[question]
 
@@ -281,7 +278,7 @@ $(document).ready(function(){
 			url: `/send_comment`,
 			dataType: 'json',
 			data: {
-				comment: 'Comentário legal',
+				comment: 'Comentário positivo',
 				author: 'Wilk',
 				id: candidates[0].id,
 			},
