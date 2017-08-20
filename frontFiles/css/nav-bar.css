@@ -1,0 +1,28 @@
+.paddin-logo{
+    margin-left: 20px;
+}
+
+.border-1px{
+    border: 1px solid #000;
+}
+
+html, body {height : 100%;}
+
+.geral{
+    min-height : 85.5555%;
+    
+    position : relative;
+}
+
+.meu-footer{
+    position : absolute;
+    bottom : 0;
+    width: 100%;
+    min-height: 5% 
+}
+
+.footer-message{
+    margin-top: 5px;
+    margin-left: 20px;
+    text-align: left;
+}
