@@ -5,7 +5,7 @@ const axios = require('axios');
 
 var bodyParser = require('body-parser');
 
-// app.set('view engine', 'ejs');
+app.set('view engine', 'ejs');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -20,7 +20,13 @@ app.get('/fill_form/:id', function(req, res) {
 });
 
 app.get('/show_profile', function(req, res) {
-    res.render('show_profile');
+    axios.get(`https://wilkmaia.xyz/pool`)
+	.then((response) => {
+	    res.render('show_profile', {candidates: response.data.candidates});
+	})
+	.catch((err) => {
+	    console.log(err)
+	})
 });
 
 app.get('/show_form/:id', function(req, res) {
@@ -77,10 +83,35 @@ app.post('/answer_form', function(req, res){
 	})
 });
 
-
 app.post('/send_like', function(req, res){
     axios.post(`https://wilkmaia.xyz/candidates/${req.body.id}/like`, {
 	author: req.body.author,
+    })
+	.then((response) => {
+	    res.send(response.data)
+	})
+	.catch((err) => {
+	    res.send(err.response.data)
+	})
+})
+
+app.post('/send_superlike', function(req, res){
+    axios.post(`https://wilkmaia.xyz/candidates/${req.body.id}/superlike`, {
+	author: req.body.author,
+    })
+	.then((response) => {
+	    res.send(response.data)
+	})
+	.catch((err) => {
+	    res.send(err.response.data)
+	})
+})
+
+app.post('/send_comment', function(req, res){
+    console.log(req.body)
+    axios.post(`https://wilkmaia.xyz/candidates/${req.body.id}/comments`, {
+	author: req.body.author,
+	comment: req.body.comment,
     })
 	.then((response) => {
 	    res.send(response.data)

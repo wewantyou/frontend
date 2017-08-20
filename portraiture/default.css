@@ -186,7 +186,7 @@ ul.style1 .first {
 /** WRAPPER */
 
 #wrapper {
-	width: 900px;
+	width: 1200px;
 	padding: 0px 50px;
 	background: #FFFFFF;
 }
@@ -197,11 +197,11 @@ ul.style1 .first {
 }
 
 .both {
-	display: flex;
+	display: block;
 }
 
 .left {
-	width: 600px;
+	width: 900px;
 	display: flex;
 	flex-direction: row;
   	flex-wrap: wrap;
@@ -210,10 +210,11 @@ ul.style1 .first {
 .right {
 	margin-top: 10px;
 	margin-left: 70px;
-	width: 200px;
-	display: flex;
-	flex-direction: row;
-  	flex-wrap: wrap;
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 400px;
+	display: block;
 }
 
 .card {
@@ -268,34 +269,34 @@ ul.style1 .first {
 
 /** PAGE */
 
-#page {
-	overflow: hidden;
-	padding-top: 30px;
+.page {
+	overflow: visible;
 	border-top: 1px solid #CFCFCF;
 	border-bottom: 1px solid #CFCFCF;
+	margin-top: 30px;
+	min-height: 400px;
 }
 
 /** CONTENT */
 
-#content {
+.content {
 	float: left;
-	width: 550px;
+	width: 700px;
 }
 
-#content h2 {
+.content h2 {
 	padding: 0em 0em 0em 0em;
 	font-size: 2.25em;
 }
 
 /** SIDEBAR */
 
-#sidebar {
+.sidebar {
 	float: right;
-	width: 300px;
+	width: 400px;
 }
 
-#sidebar h2 {
-	padding: 0em 0em 1em 0em;
+.sidebar h2 {
 	font-size: 2.25em;
 }
 
@@ -303,11 +304,9 @@ ul.style1 .first {
 
 #actions {
 	overflow: hidden;
-	padding: 20px 0px 60px 0px;
 }
 
 #buttonsBar {
-	margin-top: 40px;
 	overflow: hidden;
 	text-align: center;
 }
@@ -324,14 +323,14 @@ ul.style1 .first {
 #slider
 {
 	position: relative;
-	width: 900px;
+	width: 1200px;
 	margin: 0 auto;
 }
 
 #slider .viewer
 {
-	width: 900px;
-	height: 450px;
+	width: 1200px;
+	height: 700px;
 	overflow: hidden;
 	margin: 0 auto;
 }
@@ -339,14 +338,14 @@ ul.style1 .first {
 #slider .viewer .reel
 {
 display: none;
-height: 450px;
+height: 700px;
 }
 
 #slider .viewer .reel .slide
 {
 	position: relative;
-	width: 900px;
-	height: 450px;
+	width: 1200px;
+	height: 700px;
 }
 		
 		

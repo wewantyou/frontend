@@ -19,42 +19,43 @@
 				</div>
 			</div>
 
-			<div id="buttonsBar">
-				<button class="buttonsBar" id="comment"><img src="/resources/comment.png" width="50" height="50" alt="" /></button>
-				<button class="buttonsBar" id="dislike"><img src="/resources/dislike.png" width="50" height="50" alt="" /></button>
-				<button class="buttonsBar" id="unsure"><img src="/resources/unsure.png" width="50" height="50" alt="" /></button>
-				<button class="buttonsBar" id="like"><img src="/resources/like.png" width="50" height="50" alt="" /></button>
-				<button class="buttonsBar" id="superlike"><img src="/resources/star.png" width="50" height="50" alt="" /></button>
-			</div>
-
 			<div>
 				<div id="slider">
+					<div id="buttonsBar">
+						<button class="buttonsBar" id="comment"><img src="/resources/comment.png" width="50" height="50" alt="" /></button>
+						<button class="buttonsBar" id="dislike"><img src="/resources/dislike.png" width="50" height="50" alt="" /></button>
+						<button class="buttonsBar" id="unsure"><img src="/resources/unsure.png" width="50" height="50" alt="" /></button>
+						<button class="buttonsBar" id="like"><img src="/resources/like.png" width="50" height="50" alt="" /></button>
+						<button class="buttonsBar" id="superlike"><img src="/resources/star.png" width="50" height="50" alt="" /></button>
+					</div>
 					<div class="viewer">
 						<div class="reel">
+							<% candidates.forEach(function (candidate) { %>
 							<div class="slide"> 
-								<div class="both">
-									<div class="left">
-										<img id="profile-image" max-width="250" max-height="100" alt="profile image" />
+									<div class="both">
+										<div class="left">
+											<img id="profile-image-<%= candidate.id %>" width="250" height="200" alt="profile image" />
 
-										<div class="card" id="card">
+											<div class="card" id="card-<%= candidate.id %>">
+											</div>
+
+											<div class="page" id="page-<%= candidate.id %>">
+												<div class="content" id="content-<%= candidate.id %>">
+												</div>
+											</div>
 										</div>
 
-										<div id="page">
-											<div id="content">
+										<div class="right sidebar" id="sidebar-<%= candidate.id %>">
+											<div>
+												<h2>Dados</h2>
+
+												<ul class="style1" id="data-<%= candidate.id %>">
+												</ul>
 											</div>
 										</div>
 									</div>
-
-									<div class="right" id="sidebar">
-										<div>
-											<h2>Dados</h2>
-
-											<ul class="style1" id="data">
-											</ul>
-										</div>
-									</div>
 								</div>
-							</div>
+							<% }) %>
 						</div>
 					</div>
 				</div>
@@ -82,12 +83,14 @@ $(document).ready(function(){
 		return ''
 	}
 
-	function fillProfileImage (image) {
-		document.getElementById('profile-image').setAttribute('src', image)
+	function fillProfileImage (image, id) {
+		document.getElementById(`profile-image-${id}`).setAttribute('src', image)
 	}
 
 	function fillCard (candidate) {
-		var card = document.getElementById('card')
+		var id = candidate.id
+
+		var card = document.getElementById(`card-${id}`)
 		card.innerHTML = ''
 
 		var name = candidate.name
@@ -99,15 +102,15 @@ $(document).ready(function(){
 		var referral_level = candidate.referral_level
 		var comments = candidate.comments
 
-		card.innerHTML += `<h1 id="name">${name}</h1>`
-		card.innerHTML += `<div id="email">${email}</div>`
+		card.innerHTML += `<h1 id="name-${id}">${name}</h1>`
+		card.innerHTML += `<div id="email-${id}">${email}</div>`
 
 		if (referral) {
-			card.innerHTML += `<div id="referral">${referral}</div>`
-			card.innerHTML += `<div id="referral-level">${referral_level}</div>`
+			card.innerHTML += `<div id="referral-${id}"><b>Referrer</b>: ${referral}</div>`
+			card.innerHTML += `<div id="referral-level-${id}"><b>Referral Level</b>: ${referral_level}</div>`
 		}
 
-		card.innerHTML += `<div id="icons">`
+		card.innerHTML += `<div id="icons-${id}">`
 		if (facebook) {
 			card.innerHTML += `<button><a href="${facebook}"><img src="/resources/facebook-logo.png" width="15" height="15" alt="" /></a></button>`
 		}
@@ -120,19 +123,22 @@ $(document).ready(function(){
 		card.innerHTML += `</div>`
 
 		if (comments) {
-			card.innerHTML += `<div id="comments">`
-			for (var comment in comments) {
-				card.innerHTML += `<span>${comment.author}: ${comment.message}</span>`
+			card.innerHTML += `<div id="comments-${id}">`
+			for (let i = 0; i < comments.length; ++i) {
+				var comment = comments[i]
+				card.innerHTML += `<span>${comment.author}: ${comment.comment}</span><br>`
 			}
 			card.innerHTML += `</div>`
 		}
 	}
 
-	function fillContent (form) {
-		var content = document.getElementById('content')
+	function fillContent (form, id) {
+		var content = document.getElementById(`content-${id}`)
 		content.innerHTML = ''
 
 		content.innerHTML += `<ul>`
+		console.log(form)
+		form = JSON.parse(form)
 		for (var question in form) {
 			var answer = form[question]
 
@@ -141,9 +147,8 @@ $(document).ready(function(){
 		content.innerHTML += `</ul>`
 	}
 
-	function fillData (profile) {
-		var data = document.getElementById('data')
-		console.log(data.innerHTML)
+	function fillData (profile, id) {
+		var data = document.getElementById(`data-${id}`)
 		data.innerHTML = ''
 		
 		if (profile === null || profile === undefined) {
@@ -181,8 +186,6 @@ $(document).ready(function(){
 				data.innerHTML += `<b> >>>> ${lang}</b>: ${langs[lang]}<br>`
 			}
 		}
-
-		console.log(data.innerHTML)
 	}
 
 	$('#slider').slidertron({
@@ -190,14 +193,15 @@ $(document).ready(function(){
 		reelSelector: '.viewer .reel',
 		slidesSelector: '.viewer .reel .slide',
 		advanceDelay: 0000,
-		speed: 'slow'
+		speed: 'fast',
+		navNextSelector: '.buttonsBar',
 	});
 
 	function reload (candidate) {
 		fillCard(candidate)
-		fillProfileImage(getImage(candidate.fullContactProfile))
-		fillContent(candidate.form)
-		fillData(candidate.fullContactProfile)
+		fillProfileImage(getImage(candidate.fullContactProfile), candidate.id)
+		fillContent(candidate.form, candidate.id)
+		fillData(candidate.fullContactProfile, candidate.id)
 	}
 
 	$.ajax({
@@ -207,13 +211,39 @@ $(document).ready(function(){
 		success: (res) => {
 			candidates = res.candidates
 
-			console.log(candidates)
-
-			reload(candidates[0])
+			candidates.map((candidate) => {
+				reload(candidate)
+			})
 		}
 	})
 
+	$("#superlike").click(function(e){
+		if (candidates.length === 0) {
+			return
+		}
+
+		var activeSlide = document.querySelector('.active')
+		$.ajax({
+			type: 'POST',
+			url: `/send_superlike`,
+			dataType: 'json',
+			data: {
+				id: candidates[0].id,
+				author: 'Wilk',
+			},
+			success: (res) => {
+				var candidate = candidates.splice(0, 1)[0]
+				activeSlide.remove()
+			},
+		})
+	})
+
 	$("#like").click(function(e){
+		if (candidates.length === 0) {
+			return
+		}
+
+		var activeSlide = document.querySelector('.active')
 		$.ajax({
 			type: 'POST',
 			url: `/send_like`,
@@ -223,13 +253,41 @@ $(document).ready(function(){
 				author: 'Wilk',
 			},
 			success: (res) => {
-				candidates.splice(0, 1)
-				console.log(candidates)
-				if (candidates.length > 0) {
-					reload(candidates[0])
-				}
+				var candidate = candidates.splice(0, 1)[0]
+				activeSlide.remove()
 			},
 		})
+	})
+
+	$("#dislike").click(function(e){
+		var activeSlide = document.querySelector('.active')
+		if (activeSlide) {
+			activeSlide.remove()
+		}
+
+		candidates.splice(0, 1)[0]
+	})
+
+	$("#comment").click(function(e){
+		if (candidates.length === 0) {
+			return
+		}
+
+		$.ajax({
+			type: 'POST',
+			url: `/send_comment`,
+			dataType: 'json',
+			data: {
+				comment: 'Comentário legal',
+				author: 'Wilk',
+				id: candidates[0].id,
+			},
+		})
+	})
+
+	$("#unsure").click(function(e){
+		candidate = candidates.splice(0, 1)[0]
+		candidates.push(candidate)
 	})
 });
 </script> 
