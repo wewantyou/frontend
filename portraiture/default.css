@@ -1,3 +1,141 @@
+.block{
+  margin-left: 20px;	
+  margin-top: 20px;
+  color: #6CB94A;
+}
+.addBlock {
+	margin-left: 35px;
+	margin-top: 40px;
+	display: flex;
+}
+.addButton {
+  width: 25px;
+  height: 25px;
+
+  border-style: solid;
+  border-color: #6CB94A;
+  border-radius: 50%;
+  border-width: 1px;
+}
+.addButtonText{
+  margin-left: 3.25px;
+  margin-top: -8.75px;
+  position: absolute;
+  text-align:center;
+
+  font-size: 30px;
+  color: #6CB94A;
+  display:table-cell;
+}
+.addSpace {
+  margin-left: 15px;
+  margin-right: 5px;
+  color: #6CB94A;
+  font-size: 20px;
+  float:left;
+}
+.addText {
+  padding-top: 3px;
+  font-size: 17px;
+  color: #6CB94A;
+}
+.submitDiv{
+  display: flex;
+  justify-content: center;
+}
+.submitButton {
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-top: 20px;
+  color: #6CB94A;
+  font-size: 25px;
+}
+.deleteBlock {
+	margin-left: 15px;
+	margin-bottom: 50px;
+	margin-top: 20px;
+	display: flex;
+}
+.deleteButton {
+  width: 25px;
+  height: 25px;
+
+  border-style: solid;
+  border-color: #6CB94A;
+  border-radius: 50%;
+  border-width: 1px;
+}
+.deleteButtonText{
+  margin-left: 6px;
+  margin-top: -8.75px;
+  position: absolute;
+  text-align:center;
+
+  font-size: 30px;
+  color: #6CB94A;
+  display:table-cell;
+}
+.deleteSpace {
+  margin-left: 3px;
+  margin-right: 5px;
+  color: #6CB94A;
+  font-size: 20px;
+  float:left;
+}
+.deleteText {
+  padding-top: 3px;
+  font-size: 17px;
+  color: #6CB94A;
+}
+.blockSelector{
+  margin-top: 0px;
+  color: #6CB94A;
+  font-size: 15px;
+}
+.question{
+  width: 743px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  color: #6CB94A;
+  font-size: 15px;
+}
+.choices{
+  width: 600px;
+}
+.choice{
+  margin-left: 15px;
+  width: 150px;
+  margin-bottom: 10px;
+  color: #6CB94A;
+  font-size: 15px;
+}
+.addChoice {
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-left: 15px;
+  margin-top: 5px;
+  color: #6CB94A;
+  font-size: 15px;
+}
+.boxes{
+  width: 600px;
+}
+.box{
+  margin-left: 15px;
+  width: 150px;
+  margin-bottom: 10px;
+  color: #6CB94A;
+  font-size: 15px;
+}
+.addBox{
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-left: 15px;
+  margin-top: 5px;
+  color: #6CB94A;
+  font-size: 15px;
+}
+
 html, body {
 	height: 100%;
 }
@@ -5,7 +143,6 @@ html, body {
 body {
 	margin: 0px;
 	padding: 0px;
-	background: #141414 url(images/img01.png) repeat;
 	font-family: 'Open Sans', sans-serif;
 	font-size: 13px;
 	color: #4F4F4F;
