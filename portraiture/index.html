@@ -1,0 +1,115 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>WeWantYou</title>
+		<meta name="keywords" content="" />
+		<meta name="description" content="" />
+		<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600|Archivo+Narrow:400,700" rel="stylesheet" type="text/css"/>
+		<link href="default.css" rel="stylesheet" type="text/css" media="all" />
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	</head>
+
+	<body>
+		<div id="wrapper" class="container">
+			<div id="header">
+				<div id="logo">
+					<h1><a href="#">We want you</a></h1>
+				</div>
+			</div>
+
+			<div>
+				<div id="slider">
+					<div class="viewer">
+						<div class="reel">
+							<div class="slide"> 
+								<div class="both">
+									<div class="left">
+										<img src="images/pic01.jpg" width="250" height="150" alt="" />
+
+										<div class="card">
+										    <h1 id="name">João Miguel</h1>
+										    <div id="email">joao@gmail.com</div>
+										    <div id="university">Universidade Federal do Rio de Janeiro</div>
+										    <div id="age">28 anos</div>
+										    <div id="icons">
+										    	<button><img src="resources/facebook-logo.png" width="15" height="15" alt="" /></button>
+										    	<button><img src="resources/github-logo.png" width="15" height="15" alt="" /></button>
+										    	<button><img src="resources/linkedin-logo.png" width="15" height="15" alt="" /></button>
+										    </div> 
+										</div>
+
+										<div id="page">
+											<div id="content">
+												<div id="github">
+
+													<div id="gitRepositories">Linguagens e repositórios</div>
+
+													<!-- for loop -->
+													<div id="languagesAndRepositories">
+														<span class="languages"></span><span>: </span><span id="repositories"></span>
+													</div>
+
+													<div class="totalRepositories">Número de repositórios: <span id="numberRepositories"></span></div>
+													<div class="totalStarrers">Total de pessoas que curtiram: <span id="numberStarrers"></span></div>
+													<div class="totalWatchers">Total de pessoas que seguem: <span id="numberWatchers"></span></div>
+												</div>
+
+												<div id="interests">Interesses: <span class="arrayInterests"></span></div>
+											</div>
+										</div>
+									</div>
+
+									<div class="right" id="sidebar">
+										<div>
+											<h2>Categories</h2>
+
+											<ul class="style1">
+												<li class="first"><a href="#">Aliquam</a></li>
+												<li><a href="#">Consectetuer</a></li>
+												<li><a href="#">Metus a</a></li>
+												<li><a href="#">Suspendisse</a></li>
+												<li><a href="#">Urnanet non</a></li>
+												<li><a href="#">Proi</a></li>
+												<li><a href="#">Suspendiss</a></li>
+												<li><a href="#">Urnanet no</a></li>
+												<li><a href="#">Bob no</a></li>
+											</ul>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div id="buttonsBar">
+				<button class="buttonsBar" id="Comment"><img src="resources/comment.png" width="40" height="40" alt="" /></button>
+				<button class="buttonsBar"><img src="resources/dislike.png" width="40" height="40" alt="" /></button>
+				<button class="buttonsBar"><img src="resources/unsure.png" width="40" height="40" alt="" /></button>
+				<button class="buttonsBar"><img src="resources/like.png" width="40" height="40" alt="" /></button>
+				<button class="buttonsBar"><img src="resources/star.png" width="40" height="40" alt="" /></button>
+			</div>
+
+			<div id="footer">
+				<p>Copyright (c) 2017 wewantyou.com</p>
+			</div>
+		</div>
+	</body>
+</html>
+
+<script type="text/javascript" src="jquery-1.7.1.min.js"></script>
+<script type="text/javascript" src="jquery.slidertron-1.1.js"></script>
+
+
+<script type="text/javascript">
+	$('#slider').slidertron({
+		viewerSelector: '.viewer',
+		reelSelector: '.viewer .reel',
+		slidesSelector: '.viewer .reel .slide',
+		advanceDelay: 0000,
+		speed: 'slow'
+	});
+</script> 
