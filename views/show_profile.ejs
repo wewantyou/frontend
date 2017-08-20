@@ -136,13 +136,13 @@ $(document).ready(function(){
 		var content = document.getElementById(`content-${id}`)
 		content.innerHTML = ''
 
-		content.innerHTML += `<ul>`
+		content.innerHTML += `<ul class="myQuestionAnswer">`
 		console.log(form)
 		if(typeof form == 'string') form = JSON.parse(form)
 		for (var question in form) {
 			var answer = form[question]
 
-			content.innerHTML += `<li><b>${question}</b><br>${answer}</li>`
+			content.innerHTML += `<li class="myList"><b class="myQuestion">${question}</b><br><b class="myAnswer">${answer}</b></li>`
 		}
 		content.innerHTML += `</ul>`
 	}

@@ -173,6 +173,24 @@
 .myReference {
 	margin-bottom: 10px;
 }
+.myList {
+	list-style: none;
+	margin-bottom: 10px;
+}
+.myQuestionAnswer {
+	margin-left: 30px;
+	list-style: none;
+}
+.myQuestion {
+	margin-left: 30px;
+	font-size: 15px;
+	list-style: none;
+}
+.myAnswer {
+	margin-left: 30px;
+	font-size: 15px;
+}
+
 
 html, body {
 	height: 100%;
