@@ -1,11 +1,17 @@
 <!DOCTYPE html>
 <html>
     <head>
-      <link rel="stylesheet" href="create_form_style.css">
+      <!-- <link rel="stylesheet" href="create_form_style.css"> -->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet" type="text/css" href="default.css">
+      <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
+      <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+      <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
     </head>
 
     <div class="container">
         <!-- <div class="title">Crie seu form</div> -->
+
     </div>
 
     <div class="space" id="help"></div>
@@ -13,6 +19,7 @@
     <body>
         <div class="blocks" id="blocks"></div>
         <!-- <button class="submitButton" id>Submeter</button> -->
+        <script><%= id %></script>
     </body>
 
 </html>
@@ -20,26 +27,78 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 
     <script>
-    function getParameterByName(name, url) {
-    if (!url) url = window.location.href;
-        name = name.replace(/[\[\]]/g, "\\$&");
-        var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
-            results = regex.exec(url);
-        if (!results) return null;
-        if (!results[2]) return '';
-        return decodeURIComponent(results[2].replace(/\+/g, " "));
-    }
 
     $(document).ready(function(){
+        var formID = <%= id %>;
+        var emailCandidate = `<%= email %>`;
+
+
+        $.get( `/show_form/${formID}`, function( data ) {
         my_form=document.createElement('form');
         my_form.name='myForm';
         my_form.method='POST';
         my_form.action='/answer_form';
-        $.get( `/show_form/1`, function( data ) {
+        var newDivForm = document.createElement("div");
+        newDivForm.className = "mdl-textfield mdl-js-textfield center-items";
+        var labelGit = document.createElement("label");
+        var tGit = document.createTextNode("Github account:");
+        labelGit.appendChild(tGit);
+
+        txtGit = document.createElement("input");
+        txtGit.className = "mdl-textfield__input";
+        txtGit.setAttribute("type", "text");
+        txtGit.setAttribute("name", "github");
+        newDivForm.appendChild(labelGit);
+        newDivForm.appendChild(document.createElement("br"))
+        newDivForm.appendChild(txtGit);
+        newDivForm.appendChild(document.createElement("br"));
+
+        var labelName = document.createElement("label");
+        var tName = document.createTextNode("Name:");
+        labelName.appendChild(tName);
+
+        txtName = document.createElement("input");
+        txtName.className = "mdl-textfield__input";
+        txtName.setAttribute("type", "text");
+        txtName.setAttribute("name", "name");
+        newDivForm.appendChild(labelName);
+        newDivForm.appendChild(document.createElement("br"));
+        newDivForm.appendChild(txtName);
+        newDivForm.appendChild(document.createElement("br"));
+
+        var labelEmail = document.createElement("label");
+        var tEmail = document.createTextNode("Email:");
+        labelEmail.appendChild(tEmail);
+
+        txtEmail = document.createElement("input");
+        txtEmail.className = "mdl-textfield__input";
+        txtEmail.setAttribute("type", "text");
+        txtEmail.setAttribute("name", "email");
+        txtEmail.setAttribute("value", emailCandidate);
+        newDivForm.appendChild(labelEmail);
+        newDivForm.appendChild(document.createElement("br"));
+        newDivForm.appendChild(txtEmail);
+        newDivForm.appendChild(document.createElement("br"));
+
+        var labelLinkedin = document.createElement("label");
+        var tLinkedin = document.createTextNode("Linkedin:");
+        labelLinkedin.appendChild(tLinkedin);
+
+        txtLinkedin = document.createElement("input");
+        txtLinkedin.className = "mdl-textfield__input";
+        txtLinkedin.setAttribute("type", "text");
+        txtLinkedin.setAttribute("name", "linkedin");
+        newDivForm.appendChild(labelLinkedin);
+        newDivForm.appendChild(document.createElement("br"));
+        newDivForm.appendChild(txtLinkedin);
+        my_form.appendChild(newDivForm);
+        my_form.appendChild(document.createElement("br"));
+
             data.message.form.forEach(function (element){
                 //text, radio, checkbox -- html
                 // Text, Boxes, Multiple -- front
                 var newDiv = document.createElement("div");
+                newDiv.className = "mdl-grid";
                 newDiv.setAttribute("id", element["question"]);
                 var newElement = document.createElement("input");
                 var shouldAdd = true;
@@ -92,70 +151,22 @@
                     var t = document.createTextNode(element["question"].trim());
                     label.appendChild(t);
                     newDiv.appendChild(label);
-                    newDiv.appendChild(document.createElement("br"))
+                    newDiv.appendChild(document.createElement("br"));
                     newDiv.appendChild(newElement);
                 }
                 my_form.appendChild(newDiv);
 
             })
-        });
-
-        var labelGit = document.createElement("label");
-        var tGit = document.createTextNode("Github account:");
-        labelGit.appendChild(tGit);
-
-        txtGit = document.createElement("input");
-        txtGit.setAttribute("type", "text");
-        txtGit.setAttribute("name", "github");
-        my_form.appendChild(labelGit);
-        my_form.appendChild(document.createElement("br"))
-        my_form.appendChild(txtGit);
-        my_form.appendChild(document.createElement("br"));
-
-        var labelName = document.createElement("label");
-        var tName = document.createTextNode("Name:");
-        labelName.appendChild(tName);
-
-        txtName = document.createElement("input");
-        txtName.setAttribute("type", "text");
-        txtName.setAttribute("name", "name");
-        my_form.appendChild(labelName);
-        my_form.appendChild(document.createElement("br"));
-        my_form.appendChild(txtName);
-        my_form.appendChild(document.createElement("br"));
-
-        var labelEmail = document.createElement("label");
-        var tEmail = document.createTextNode("Email:");
-        labelEmail.appendChild(tEmail);
-
-        txtEmail = document.createElement("input");
-        txtEmail.setAttribute("type", "text");
-        txtEmail.setAttribute("name", "email");
-        my_form.appendChild(labelEmail);
-        my_form.appendChild(document.createElement("br"));
-        my_form.appendChild(txtEmail);
-        my_form.appendChild(document.createElement("br"));
-
-        var labelLinkedin = document.createElement("label");
-        var tLinkedin = document.createTextNode("Linkedin:");
-        labelLinkedin.appendChild(tLinkedin);
-
-        txtLinkedin = document.createElement("input");
-        txtLinkedin.setAttribute("type", "text");
-        txtLinkedin.setAttribute("name", "linkedin");
-        my_form.appendChild(labelLinkedin);
-        my_form.appendChild(document.createElement("br"));
-        my_form.appendChild(txtLinkedin);
-        my_form.appendChild(document.createElement("br"));
-
 
         button = document.createElement("input");
         button.setAttribute("type", "submit");
         button.setAttribute("value", "Cadastrar");
-
+        button.className = 'mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent';
 
         my_form.appendChild(button);
         document.body.appendChild(my_form);
+        });
+
     });
 
     </script>

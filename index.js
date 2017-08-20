@@ -15,8 +15,8 @@ app.get('/create_form', function(req, res) {
     res.render('create_form');
 });
 
-app.get('/fill_form', function(req, res) {
-    res.render('form_to_complete');
+app.get('/fill_form/:id', function(req, res) {
+    res.render('form_to_complete', {id: req.params.id, email: req.query.email});
 });
 
 app.get('/show_profile', function(req, res) {
@@ -76,6 +76,6 @@ app.post('/answer_form', function(req, res){
 		res.render('form_to_complete')
 	})
 });
->>>>>>> wip
+
 
 app.listen(3000);
