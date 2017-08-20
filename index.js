@@ -5,7 +5,7 @@ const axios = require('axios');
 
 var bodyParser = require('body-parser');
 
-app.set('view engine', 'ejs');
+// app.set('view engine', 'ejs');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -77,5 +77,17 @@ app.post('/answer_form', function(req, res){
 	})
 });
 
+
+app.post('/send_like', function(req, res){
+    axios.post(`https://wilkmaia.xyz/candidates/${req.body.id}/like`, {
+	author: req.body.author,
+    })
+	.then((response) => {
+	    res.send(response.data)
+	})
+	.catch((err) => {
+	    res.send(err.response.data)
+	})
+})
 
 app.listen(3000);

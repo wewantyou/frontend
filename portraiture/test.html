@@ -214,6 +214,7 @@ $(document).ready(function(){
 	})
 
 	$("#like").click(function(e){
+		$("#data").html('')
 		$.ajax({
 			type: 'POST',
 			url: `/send_like`,
