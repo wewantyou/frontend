@@ -138,7 +138,10 @@ $(document).ready(function(){
 
 		content.innerHTML += `<ul>`
 		console.log(form)
-		form = JSON.parse(form)
+		if (typeof form === 'string') {
+			form = JSON.parse(form)
+		}
+
 		for (var question in form) {
 			var answer = form[question]
 
