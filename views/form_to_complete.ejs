@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <link rel="stylesheet" href="create_form_style.css">
+    </head>
+
+    <div class="container">
+        <!-- <div class="title">Crie seu form</div> -->
+    </div>
+
+    <div class="space" id="help"></div>
+
+    <body>
+        <div class="blocks" id="blocks"></div>
+        <!-- <button class="submitButton" id>Submeter</button> -->
+    </body>
+
+</html>
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+    <script>
+    function getParameterByName(name, url) {
+    if (!url) url = window.location.href;
+        name = name.replace(/[\[\]]/g, "\\$&");
+        var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+            results = regex.exec(url);
+        if (!results) return null;
+        if (!results[2]) return '';
+        return decodeURIComponent(results[2].replace(/\+/g, " "));
+    }
+
+    $(document).ready(function(){
+        my_form=document.createElement('form');
+        my_form.name='myForm';
+        my_form.method='POST';
+        my_form.action='/answer_form';
+        $.get( `/show_form/1`, function( data ) {
+            data.message.form.forEach(function (element){
+                //text, radio, checkbox -- html
+                // Text, Boxes, Multiple -- front
+                var newDiv = document.createElement("div");
+                newDiv.setAttribute("id", element["question"]);
+                var newElement = document.createElement("input");
+                var shouldAdd = true;
+                switch(element["option"].toLowerCase()){
+                    case "text":
+                        newElement = document.createElement("textarea");
+                        newElement.setAttribute("name", element["question"]);
+                        newElement.setAttribute("rows", "10");
+                        newElement.setAttribute("cols", "30");
+                        break;
+                    case "boxes":
+                        var newContent = document.createTextNode(element["question"]);
+                        newDiv.appendChild(newContent)
+                        newDiv.appendChild(document.createElement("br"))
+                        element["answer"].forEach(function (answer){
+                            var label = document.createElement("label");       // Create a text node
+                            var t = document.createTextNode(answer.toLowerCase());
+                            label.appendChild(t);
+                            newDiv.appendChild(label);
+                            var nn = document.createElement("input");
+                            nn.setAttribute("type", "radio");
+                            nn.setAttribute("name", element["question"]);
+                            nn.setAttribute("value", answer);
+                            newDiv.appendChild(nn);
+                        })
+
+                        shouldAdd = false
+                        break;
+                    case "multiple":
+                        var newContent = document.createTextNode(element["question"]);
+                        newDiv.appendChild(newContent)
+                        newDiv.appendChild(document.createElement("br"))
+                        element["answer"].forEach(function (answer){
+                            var label = document.createElement("label");       // Create a text node
+                            var t = document.createTextNode(answer.toLowerCase());
+                            label.appendChild(t);
+                            newDiv.appendChild(label);
+                            var nn = document.createElement("input");
+                            nn.setAttribute("type", "checkbox");
+                            nn.setAttribute("name", element["question"]);
+                            nn.setAttribute("value", answer);
+                            newDiv.appendChild(nn);
+                        })
+
+                        shouldAdd = false
+                        break;
+                }
+                if(shouldAdd){
+                    var label = document.createElement("label");
+                    var t = document.createTextNode(element["question"].trim());
+                    label.appendChild(t);
+                    newDiv.appendChild(label);
+                    newDiv.appendChild(document.createElement("br"))
+                    newDiv.appendChild(newElement);
+                }
+                my_form.appendChild(newDiv);
+
+            })
+        });
+
+        var labelGit = document.createElement("label");
+        var tGit = document.createTextNode("Github account:");
+        labelGit.appendChild(tGit);
+
+        txtGit = document.createElement("input");
+        txtGit.setAttribute("type", "text");
+        txtGit.setAttribute("name", "github");
+        my_form.appendChild(labelGit);
+        my_form.appendChild(document.createElement("br"))
+        my_form.appendChild(txtGit);
+        my_form.appendChild(document.createElement("br"));
+
+        var labelName = document.createElement("label");
+        var tName = document.createTextNode("Name:");
+        labelName.appendChild(tName);
+
+        txtName = document.createElement("input");
+        txtName.setAttribute("type", "text");
+        txtName.setAttribute("name", "name");
+        my_form.appendChild(labelName);
+        my_form.appendChild(document.createElement("br"));
+        my_form.appendChild(txtName);
+        my_form.appendChild(document.createElement("br"));
+
+        var labelEmail = document.createElement("label");
+        var tEmail = document.createTextNode("Email:");
+        labelEmail.appendChild(tEmail);
+
+        txtEmail = document.createElement("input");
+        txtEmail.setAttribute("type", "text");
+        txtEmail.setAttribute("name", "email");
+        my_form.appendChild(labelEmail);
+        my_form.appendChild(document.createElement("br"));
+        my_form.appendChild(txtEmail);
+        my_form.appendChild(document.createElement("br"));
+
+        var labelLinkedin = document.createElement("label");
+        var tLinkedin = document.createTextNode("Linkedin:");
+        labelLinkedin.appendChild(tLinkedin);
+
+        txtLinkedin = document.createElement("input");
+        txtLinkedin.setAttribute("type", "text");
+        txtLinkedin.setAttribute("name", "linkedin");
+        my_form.appendChild(labelLinkedin);
+        my_form.appendChild(document.createElement("br"));
+        my_form.appendChild(txtLinkedin);
+        my_form.appendChild(document.createElement("br"));
+
+
+        button = document.createElement("input");
+        button.setAttribute("type", "submit");
+        button.setAttribute("value", "Cadastrar");
+
+
+        my_form.appendChild(button);
+        document.body.appendChild(my_form);
+    });
+
+    </script>
+
